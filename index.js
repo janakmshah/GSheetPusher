@@ -13,12 +13,12 @@ try {
 
     const doc = new GoogleSpreadsheet(spreadsheetId);
 
-    await doc.useServiceAccountAuth({
+    doc.useServiceAccountAuth({
         client_email: gSheetsServiceEmail, //process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
         private_key: gSheetsServiceKey //process.env.GOOGLE_PRIVATE_KEY,
     });
 
-    await doc.loadInfo();
+    doc.loadInfo();
     console.log(doc.title);
 
     const sheet = doc.sheetsByIndex[0];
