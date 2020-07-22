@@ -22,14 +22,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
         //Node12 doesn't support optional chaining :(
         const payload = github.context.payload || {}
-        console.log(payload)
-
         const commits = payload.commits || []
-        console.log(commits)
-
         const firstCommit = commits[0] || {}
-        console.log(firstCommit)
-
         const commitName = firstCommit.message || "No commit name"
 
         linguistInput["Commit name"] = commitName
