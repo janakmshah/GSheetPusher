@@ -29,10 +29,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         linguistInput["Commit name"] = commitName
         linguistInput["Date"] = (new Date()).toUTCString()
 
-        console.log(linguistInput)
-
         const sheet = doc.sheetsByIndex[worksheetIndex];
-        sheet.addRow(languagesArray);
+        sheet.addRow(linguistInput);
 
         // Get the GitHub webhook payload for the GitHub event that triggered the workflow
         // const payload = JSON.stringify(github.context.payload, undefined, 2)
