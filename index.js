@@ -32,10 +32,6 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         const sheet = doc.sheetsByIndex[worksheetIndex];
         sheet.addRow(linguistInput);
 
-        Get the GitHub webhook payload for the GitHub event that triggered the workflow
-        const payload = JSON.stringify(github.context.payload, undefined, 2)
-        console.log(`The event payload: ${payload}`);
-
     } catch (error) {
         core.setFailed(error.message);
     }
