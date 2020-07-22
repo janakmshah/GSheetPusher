@@ -6,12 +6,26 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
     try {
 
-        const spreadsheetId = core.getInput('spreadsheetId');
-        const linguistInput = {"Ruby": "75.21%", "Dockerfile": "19.80%", "Shell": "5.00%"}
-        const worksheetIndex = core.getInput('worksheetIndex');
+        const githubToken = core.getInput('GITHUB_TOKEN');
 
-        console.log(spreadsheetId)
-        console.log(process.env.GSHEET_TEST)
+        const { context } = github;
+        if (context.payload.pull_request == null) {
+            core.setFailed('No pull request found.');
+        }
+
+        const pullRequestNumber = context.payload.pull_request.number;
+        const octokit = new github.GitHub(githubToken);
+        const message = 'Actions wrote this comment';
+
+        octokit.issues.createComment({
+            ...context.repo,
+            issue_number: pullRequestNumber,
+            body: message,
+        });
+
+        const spreadsheetId = core.getInput('spreadsheetId');
+        const linguistInput = { "Ruby": "75.21%", "Dockerfile": "19.80%", "Shell": "5.00%" }
+        const worksheetIndex = core.getInput('worksheetIndex');
 
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
