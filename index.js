@@ -10,6 +10,9 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         const linguistInput = {"Ruby": "75.21%", "Dockerfile": "19.80%", "Shell": "5.00%"}
         const worksheetIndex = core.getInput('worksheetIndex');
 
+        console.log(spreadsheetId)
+        console.log(process.env.GSHEET_TEST)
+
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
         await doc.useServiceAccountAuth({
