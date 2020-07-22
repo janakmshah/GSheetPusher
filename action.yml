@@ -1,6 +1,9 @@
 name: 'GSheetPusher'
 description: 'Append given data to a new row on a given GSheet'
 inputs:
+  linguistPayload:
+    description: 'Linguist output to add in Google Sheet'
+    required: true
   spreadsheetId:
     description: 'Google Sheets spreadsheet id'
     required: true

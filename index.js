@@ -7,7 +7,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
     try {
 
         const spreadsheetId = core.getInput('spreadsheetId');
-        const linguistInput = { "Ruby": "75.21%", "Dockerfile": "19.80%", "Shell": "5.00%" }
+        const linguistInput = core.getInput('linguistPayload');
         const worksheetIndex = core.getInput('worksheetIndex');
 
         const doc = new GoogleSpreadsheet(spreadsheetId);
