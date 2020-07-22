@@ -25,9 +25,13 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
             languagesArray.push(linguistInput[language] + " - " + language);
         }
 
-        
+        //Node12 doesn't support optional chaining :(
+        const pushMeta = github.context.payload.push ?? {}
+        const commits = pushMeta.commits || []
+        const firstCommit = commits[0] || {}
+        const commitName = firstCommit.message || "No commit name"
 
-        languagesArray.unshift(github.context.payload.push?.commits[0]?.message || "No commit name", (new Date()).toUTCString())
+        languagesArray.unshift(commitName, (new Date()).toUTCString())
 
         console.log(languagesArray)
 
