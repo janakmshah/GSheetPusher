@@ -13,8 +13,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
         await doc.useServiceAccountAuth({
-            client_email: env.GSHEET_CLIENT_EMAIL,
-            private_key: env.GSHEET_PRIVATE_KEY,
+            client_email: process.env.GSHEET_CLIENT_EMAIL,
+            private_key: process.env.GSHEET_PRIVATE_KEY,
         });
 
         await doc.loadInfo();
