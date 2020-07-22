@@ -21,8 +21,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         console.log(doc.title);
 
         //Node12 doesn't support optional chaining :(
-        const pushMeta = github.context.payload.push || {}
-        const commits = pushMeta.commits || []
+        const payload = github.context.payload || {}
+        const commits = payload.commits || []
         const firstCommit = commits[0] || {}
         const commitName = firstCommit.message || "No commit name"
 
