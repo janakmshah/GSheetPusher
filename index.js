@@ -6,23 +6,6 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
     try {
 
-        const githubToken = core.getInput('GITHUB_TOKEN');
-
-        const { context } = github.context;
-        if (context.payload.pull_request == null) {
-            core.setFailed('No pull request found.');
-        }
-
-        const pullRequestNumber = context.payload.pull_request.number;
-        const octokit = new github.GitHub(githubToken);
-        const message = 'Actions wrote this comment';
-
-        octokit.issues.createComment({
-            ...context.repo,
-            issue_number: pullRequestNumber,
-            body: message,
-        });
-
         const spreadsheetId = core.getInput('spreadsheetId');
         const linguistInput = { "Ruby": "75.21%", "Dockerfile": "19.80%", "Shell": "5.00%" }
         const worksheetIndex = core.getInput('worksheetIndex');
@@ -31,7 +14,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
         await doc.useServiceAccountAuth({
             client_email: process.env.GSHEET_CLIENT_EMAIL,
-            private_key: process.env.GSHEET_PRIVATE_KEY,
+            private_key: process.env.GSHEET_PRIVATE_KEY.replace(/\\n/gm, '\n')
         });
 
         await doc.loadInfo();

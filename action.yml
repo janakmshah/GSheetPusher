@@ -1,9 +1,6 @@
 name: 'GSheetPusher'
 description: 'Append given data to a new row on a given GSheet'
 inputs:
-  GITHUB_TOKEN:
-    description: 'Pass in secrets.GITHUB_TOKEN'
-    required: true
   spreadsheetId:
     description: 'Google Sheets spreadsheet id'
     required: true
