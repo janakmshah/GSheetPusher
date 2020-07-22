@@ -1,16 +1,10 @@
 name: 'GSheetPusher'
 description: 'Append given data to a new row on a given GSheet'
 inputs:
-  gSheetsServiceEmail:
-    description: 'Google API Service account email id'
-    required: true
-  gSheetsServiceKey:
-    description: 'Google API Service account auth key'
-    required: true
   spreadsheetId:
     description: 'Google Sheets spreadsheet id'
     required: true
-  worksheetName:
+  worksheetIndex:
     description: 'Worksheet name within the spreadsheet'
     required: true
 outputs:
