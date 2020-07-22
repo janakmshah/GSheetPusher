@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 try {
 
@@ -8,18 +9,30 @@ try {
     const spreadsheetId = core.getInput('spreadsheetId');
     const worksheetName = core.getInput('worksheetName');
 
-    console.log(`Hello ${gSheetsServiceEmail}`);
-    console.log(`Hello ${gSheetsServiceKey}`);
-    console.log(`Hello ${spreadsheetId}`);
-    console.log(`Hello ${worksheetName}`);
+    //console.log(`Hello ${worksheetName}`);
 
-    const time = (new Date()).toTimeString();
-    core.setOutput("time", time);
+    const doc = new GoogleSpreadsheet(spreadsheetId);
 
-    // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`Author is ${github.context.payload.sender.login}`)
-    console.log(`The event payload: ${payload}`);
+    await doc.useServiceAccountAuth({
+        client_email: gSheetsServiceEmail, //process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: gSheetsServiceKey //process.env.GOOGLE_PRIVATE_KEY,
+    });
+
+    await doc.loadInfo();
+    console.log(doc.title);
+
+    const sheet = doc.sheetsByIndex[0];
+    console.log(sheet.title);
+    console.log(sheet.rowCount);
+    console.log(sheet.payload)
+
+    // const time = (new Date()).toTimeString();
+    // core.setOutput("time", time);
+
+    // Get the GitHub webhook payload for the GitHub event that triggered the workflow
+    // const payload = JSON.stringify(github.context.payload, undefined, 2)
+    // console.log(`Author is ${github.context.payload.sender.login}`)
+    // console.log(`The event payload: ${payload}`);
 
 } catch (error) {
     core.setFailed(error.message);
