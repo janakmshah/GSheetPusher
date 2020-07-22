@@ -11,7 +11,7 @@ try {
 
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`Author is ${payload.sender.login}`)
+    // console.log(`Author is ${payload.sender.login}`)
     console.log(`The event payload: ${payload}`);
 
 } catch (error) {
