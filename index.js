@@ -29,7 +29,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         linguistInput["Commit name"] = commitName
         linguistInput["Date"] = (new Date()).toUTCString()
 
-        const sheet = doc.sheetsById(worksheetName) || await doc.addSheet({ headerValues: Object.keys(linguistInput) });
+        const sheet = doc.sheetsByIndex.find(element => element.title == worksheetName) || await doc.addSheet({ headerValues: Object.keys(linguistInput) });
         if (sheet.title != worksheetName) { sheet.updateProperties({ title: worksheetName }) }
         sheet.addRow(linguistInput);
 
