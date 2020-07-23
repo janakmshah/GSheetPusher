@@ -25,8 +25,9 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         const commits = payload.commits || []
         const firstCommit = commits[0] || {}
         const commitName = firstCommit.message || "No commit name"
+        const firstLine = commitName.split('\n')[0]
 
-        linguistInput["Commit name"] = commitName
+        linguistInput["Commit name"] = firstLine
         linguistInput["Date"] = (new Date()).toUTCString()
 
         const sheet = doc.sheetsByIndex.find(element => element.title.toLowerCase() == worksheetName.toLowerCase()) || await doc.addSheet({ headerValues: Object.keys(linguistInput), title: worksheetName });
