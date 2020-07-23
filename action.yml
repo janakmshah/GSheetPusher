@@ -7,12 +7,9 @@ inputs:
   spreadsheetId:
     description: 'Google Sheets spreadsheet id'
     required: true
-  worksheetIndex:
+  worksheetName:
     description: 'Worksheet name within the spreadsheet'
     required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node12'
   main: 'index.js'

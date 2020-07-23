@@ -8,7 +8,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
         const spreadsheetId = core.getInput('spreadsheetId');
         const linguistInput = JSON.parse(core.getInput('linguistPayload'));
-        const worksheetIndex = core.getInput('worksheetIndex');
+        const worksheetName = core.getInput('worksheetIndex');
 
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
@@ -29,7 +29,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         linguistInput["Commit name"] = commitName
         linguistInput["Date"] = (new Date()).toUTCString()
 
-        const sheet = doc.sheetsByIndex[worksheetIndex];
+        const sheet = doc.sheetsById(worksheetName) || await doc.addSheet({ headerValues: Object.keys(linguistInput) });
+        if (sheet.title != worksheetName) { sheet.updateProperties({ title: worksheetName }) }
         sheet.addRow(linguistInput);
 
     } catch (error) {
