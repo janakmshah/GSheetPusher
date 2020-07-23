@@ -10,6 +10,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
         const linguistInput = JSON.parse(core.getInput('linguistPayload'));
         const worksheetName = core.getInput('worksheetIndex');
 
+        console.log(worksheetName)
+
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
         await doc.useServiceAccountAuth({
