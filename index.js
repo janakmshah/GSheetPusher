@@ -8,7 +8,9 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
         const spreadsheetId = core.getInput('spreadsheetId');
         const linguistInput = JSON.parse(core.getInput('linguistPayload'));
-        const worksheetName = core.getInput('worksheetName') || "unknown";
+        const worksheetName = core.getInput('worksheetName') || github.context.payload.ref.replace('refs/heads/', '')
+
+        console.log(`The worksheet name is: ${worksheetName}`)
 
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
