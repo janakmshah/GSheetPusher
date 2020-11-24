@@ -8,7 +8,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
         const spreadsheetId = core.getInput('spreadsheetId');
         const linguistInput = JSON.parse(core.getInput('linguistPayload'));
-        const worksheetName = core.getInput('worksheetName');
+        const worksheetName = core.getInput('worksheetName') || "unknown";
 
         const doc = new GoogleSpreadsheet(spreadsheetId);
 
