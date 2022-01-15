@@ -21,6 +21,6 @@
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "google-spreadsheet": "^3.0.11",
-    "node-forge": ">=0.10.0"
+    "node-forge": ">=1.0.0"
   }
 }
