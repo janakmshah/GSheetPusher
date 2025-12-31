@@ -17,10 +17,5 @@
     "url": "https://github.com/janakmshah/GSheetPusher/issues"
   },
   "homepage": "https://github.com/janakmshah/GSheetPusher#readme",
-  "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "google-spreadsheet": "^3.0.11",
-    "node-forge": ">=1.3.0"
-  }
+  "dependencies": {}
 }
